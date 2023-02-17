@@ -17,7 +17,7 @@ git clone https://github.com/deikkiu/react-native-realtor-app.git
 + Navigate to the project directory by running the following command in your terminal:
 
 ```console
-cd realtor-company
+cd react-native-realtor-app
 ```
 + Install the project dependencies by running the following command in your terminal:
 
