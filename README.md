@@ -1,7 +1,7 @@
-# Real Estate App "HouseHub"
+# Real Estate App "EstateEase"
 
 ## Introduction
-The HouseHub is a React Native mobile application designed for real estate companies to showcase their properties to potential clients. This application provides an easy-to-use interface for users to browse through available properties and filter them based on their preferences. The application also allows users to save their favorite properties and contact the real estate agents for more information.
+The **EstateEase** is a React Native mobile application designed for real estate companies to showcase their properties to potential clients. This application provides an easy-to-use interface for users to browse through available properties and filter them based on their preferences. The application also allows users to save their favorite properties and contact the real estate agents for more information.
 
 ## Getting Started
 To run the application on your device, you need to have the Expo Go app installed on your device. You can download the Expo Go app from the App Store or Google Play Store.
