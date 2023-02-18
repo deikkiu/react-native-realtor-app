@@ -1,22 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
 // Изменить цвет png tintColor
+import { Tabs } from './navigation/Tabs';
+import { Login } from './screens/index';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Start Real State App</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <Login />
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
