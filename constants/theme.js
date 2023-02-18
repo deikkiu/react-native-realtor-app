@@ -11,7 +11,7 @@ export const COLORS = {
   red: '#F9A8BA',
   gray: '#6A6A6A',
   lightGray: '#dbdbdb',
-  lightGray1: '#f5f6fa',
+  lightGray2: '#f5f6fa',
 };
 
 export const SIZES = {
