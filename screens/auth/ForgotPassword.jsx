@@ -9,7 +9,7 @@ import {
 import { Icon } from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES, images } from '../../constants';
 
-export const Login = ({ navigation }) => {
+export const ForgotPassword = ({ navigation }) => {
   return (
     <View style={styles.main}>
       <View style={styles.container}>
@@ -19,34 +19,25 @@ export const Login = ({ navigation }) => {
             <Text style={styles.brandName}>EstateEasy</Text>
           </View>
 
-          <Text style={styles.loginContinueTxt}>Войдите в систему</Text>
+          <Text style={styles.loginContinueTxt}>Забыли пароль?</Text>
           <TextInput style={styles.input} placeholder="Почта" />
-          <TextInput style={styles.input} placeholder="Пароль" />
 
-          {/* {Login button} */}
+          <Text
+            style={{ color: 'red', textAlign: 'center', paddingVertical: 2 }}
+          >
+            Введите адрес вашей почты, мы отправим вам письмо с инструкцией по
+            сбросу пароля
+          </Text>
+
+          {/* {SignUp button} */}
           <View style={styles.loginBtnWrapper}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Home')}
               style={styles.loginBtn}
             >
-              <Text style={styles.loginText}>Войти</Text>
+              <Text style={styles.loginText}>Отправить</Text>
             </TouchableOpacity>
           </View>
-
-          {/* Forgot password */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ForgotPassword')}
-          >
-            <Text style={styles.forgotPassText}>Забыли пароль?</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Нет учетной записи? </Text>
-          {/* SignUp button */}
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.signupBtn}>Зарегистрироваться</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -56,14 +47,11 @@ export const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 15,
   },
   container: {
-    paddingTop: 15,
-    paddingHorizontal: 15,
     paddingBottom: 70,
+    paddingHorizontal: 15,
     width: '100%',
     position: 'relative',
     flex: 1,
@@ -124,27 +112,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 16,
     fontWeight: '400',
-  },
-  forgotPassText: {
-    color: COLORS.secondary,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    marginTop: 15,
-  },
-  // footer
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    textAlign: 'center',
-    flexDirection: 'row',
-  },
-  footerText: {
-    color: COLORS.gray,
-    fontWeight: 'bold',
-  },
-  signupBtn: {
-    color: COLORS.secondary,
-    fontWeight: 'bold',
   },
   // utils
   wFull: {

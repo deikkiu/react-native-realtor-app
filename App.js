@@ -1,12 +1,10 @@
-// Изменить цвет png tintColor
-import { Tabs } from './navigation/Tabs';
-import { Login } from './screens/index';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { Navigation } from './navigation/Navigation';
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <Login />
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Navigation />
+    </NavigationContainer>
   );
 }

@@ -5,13 +5,14 @@ import {
   TextInput,
   View,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import { Icon } from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES, images } from '../../constants';
 
-export const Login = ({ navigation }) => {
+export const SignUp = ({ navigation }) => {
   return (
-    <View style={styles.main}>
+    <ScrollView style={styles.main}>
       <View style={styles.container}>
         <View style={styles.wFull}>
           <View style={styles.row}>
@@ -19,51 +20,35 @@ export const Login = ({ navigation }) => {
             <Text style={styles.brandName}>EstateEasy</Text>
           </View>
 
-          <Text style={styles.loginContinueTxt}>Войдите в систему</Text>
+          <Text style={styles.loginContinueTxt}>Создайте аккаунт</Text>
+          <TextInput style={styles.input} placeholder="Имя" />
           <TextInput style={styles.input} placeholder="Почта" />
           <TextInput style={styles.input} placeholder="Пароль" />
+          <TextInput style={styles.input} placeholder="Подтвердите пароль" />
 
-          {/* {Login button} */}
+          {/* {SignUp button} */}
           <View style={styles.loginBtnWrapper}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Home')}
               style={styles.loginBtn}
             >
-              <Text style={styles.loginText}>Войти</Text>
+              <Text style={styles.loginText}>Зарегистрироваться</Text>
             </TouchableOpacity>
           </View>
-
-          {/* Forgot password */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate('ForgotPassword')}
-          >
-            <Text style={styles.forgotPassText}>Забыли пароль?</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Нет учетной записи? </Text>
-          {/* SignUp button */}
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text style={styles.signupBtn}>Зарегистрироваться</Text>
-          </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     padding: 15,
   },
   container: {
-    paddingTop: 15,
+    paddingVertical: 70,
     paddingHorizontal: 15,
-    paddingBottom: 70,
     width: '100%',
     position: 'relative',
     flex: 1,
@@ -124,27 +109,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 16,
     fontWeight: '400',
-  },
-  forgotPassText: {
-    color: COLORS.secondary,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    marginTop: 15,
-  },
-  // footer
-  footer: {
-    position: 'absolute',
-    bottom: 0,
-    textAlign: 'center',
-    flexDirection: 'row',
-  },
-  footerText: {
-    color: COLORS.gray,
-    fontWeight: 'bold',
-  },
-  signupBtn: {
-    color: COLORS.secondary,
-    fontWeight: 'bold',
   },
   // utils
   wFull: {
