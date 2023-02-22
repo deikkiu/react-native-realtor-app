@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,10 +8,23 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { Icon } from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES, images } from '../../constants';
 
 export const SignUp = ({ navigation }) => {
+  const [inputValue, setInputValue] = useState({
+    nameValue: '',
+    emailValue: '',
+    passwordValue: '',
+    passwordConfirmValue: '',
+  });
+
+  const changeInputValue = (text, name) => {
+    setInputValue({
+      ...inputValue,
+      [name]: text,
+    });
+  };
+
   return (
     <ScrollView style={styles.main}>
       <View style={styles.container}>
@@ -21,10 +35,34 @@ export const SignUp = ({ navigation }) => {
           </View>
 
           <Text style={styles.loginContinueTxt}>Создайте аккаунт</Text>
-          <TextInput style={styles.input} placeholder="Имя" />
-          <TextInput style={styles.input} placeholder="Почта" />
-          <TextInput style={styles.input} placeholder="Пароль" />
-          <TextInput style={styles.input} placeholder="Подтвердите пароль" />
+          <TextInput
+            style={styles.input}
+            value={inputValue.nameValue}
+            placeholder="Имя"
+            onChangeText={(value) => changeInputValue(value, 'nameValue')}
+          />
+          <TextInput
+            style={styles.input}
+            value={inputValue.emailValue}
+            placeholder="Почта"
+            onChangeText={(value) => changeInputValue(value, 'emailValue')}
+          />
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            value={inputValue.passwordValue}
+            placeholder="Пароль"
+            onChangeText={(value) => changeInputValue(value, 'passwordValue')}
+          />
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            value={inputValue.passwordConfirmValue}
+            placeholder="Подтвердите пароль"
+            onChangeText={(value) =>
+              changeInputValue(value, 'passwordConfirmValue')
+            }
+          />
 
           {/* {SignUp button} */}
           <View style={styles.loginBtnWrapper}>

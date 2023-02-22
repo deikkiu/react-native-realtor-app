@@ -8,8 +8,21 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES, images } from '../../constants';
+import { useState } from 'react';
 
 export const Login = ({ navigation }) => {
+  const [inputValue, setInputValue] = useState({
+    textValue: '',
+    passwordValue: '',
+  });
+
+  const changeInputValue = (text, name) => {
+    setInputValue({
+      ...inputValue,
+      [name]: text,
+    });
+  };
+
   return (
     <View style={styles.main}>
       <View style={styles.container}>
@@ -20,8 +33,19 @@ export const Login = ({ navigation }) => {
           </View>
 
           <Text style={styles.loginContinueTxt}>Войдите в систему</Text>
-          <TextInput style={styles.input} placeholder="Почта" />
-          <TextInput style={styles.input} placeholder="Пароль" />
+          <TextInput
+            style={styles.input}
+            value={inputValue.textValue}
+            onChangeText={(value) => changeInputValue(value, 'textValue')}
+            placeholder="Почта"
+          ></TextInput>
+          <TextInput
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder="Пароль"
+            value={inputValue.passwordValue}
+            onChangeText={(value) => changeInputValue(value, 'passwordValue')}
+          />
 
           {/* {Login button} */}
           <View style={styles.loginBtnWrapper}>
@@ -64,8 +88,8 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingHorizontal: 15,
     paddingBottom: 70,
-    width: '100%',
     position: 'relative',
+    width: '100%',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -92,7 +116,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     borderRadius: 8,
     height: 55,
-    paddingVertical: 0,
   },
   // Login Btn Styles
   loginBtnWrapper: {
@@ -100,22 +123,16 @@ const styles = StyleSheet.create({
     marginTop: 12,
     shadowColor: '#000',
     shadowOffset: {
-      width: 0,
       height: 2,
     },
     shadowOpacity: 0.4,
     shadowRadius: 3,
     elevation: 5,
   },
-  linearGradient: {
-    width: '100%',
-    borderRadius: 50,
-  },
   loginBtn: {
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
     height: 55,
     borderRadius: 30,
     backgroundColor: COLORS.secondary,

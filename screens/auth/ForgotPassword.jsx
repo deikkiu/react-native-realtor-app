@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,10 +7,14 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import { Icon } from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES, images } from '../../constants';
 
 export const ForgotPassword = ({ navigation }) => {
+  const [textValue, setTextValue] = useState('');
+
+  const changeTextValue = (text) => {
+    setTextValue(text);
+  };
   return (
     <View style={styles.main}>
       <View style={styles.container}>
@@ -20,7 +25,12 @@ export const ForgotPassword = ({ navigation }) => {
           </View>
 
           <Text style={styles.loginContinueTxt}>Забыли пароль?</Text>
-          <TextInput style={styles.input} placeholder="Почта" />
+          <TextInput
+            style={styles.input}
+            value={textValue}
+            onChangeText={(value) => changeTextValue(value)}
+            placeholder="Почта"
+          />
 
           <Text
             style={{ color: 'red', textAlign: 'center', paddingVertical: 2 }}
