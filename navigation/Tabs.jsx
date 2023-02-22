@@ -29,22 +29,28 @@ export const Tabs = () => {
         tabBarIcon: ({ color, size, focused, style }) => {
           let iconName;
 
-          if (route.name === 'Home') {
-            iconName = !focused ? 'home-outline' : 'home';
-          } else if (route.name === 'Create') {
-            iconName = !focused ? 'add-circle-outline' : 'add-circle';
-            style = { paddingLeft: 3 };
-            size = 29;
-          } else if (route.name === 'Favorite') {
-            iconName = !focused ? 'heart-outline' : 'heart';
-            size = 26;
-          } else if (route.name === 'Message') {
-            iconName = !focused
-              ? 'chatbubble-ellipses-outline'
-              : 'chatbubble-ellipses';
-          } else if (route.name === 'Profile') {
-            iconName = !focused ? 'person-outline' : 'person';
-            size = 25;
+          switch (route.name) {
+            case 'Home':
+              iconName = !focused ? 'home-outline' : 'home';
+              break;
+            case 'Favorite':
+              iconName = !focused ? 'heart-outline' : 'heart';
+              size = 26;
+              break;
+            case 'Create':
+              iconName = !focused ? 'add-circle-outline' : 'add-circle';
+              style = { paddingLeft: 3 };
+              size = 29;
+              break;
+            case 'Message':
+              iconName = !focused
+                ? 'chatbubble-ellipses-outline'
+                : 'chatbubble-ellipses';
+              break;
+            case 'Profile':
+              iconName = !focused ? 'person-outline' : 'person';
+              size = 25;
+              break;
           }
 
           return (
