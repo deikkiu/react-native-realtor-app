@@ -1,9 +1,9 @@
 import { Image, Text, View, StyleSheet } from 'react-native';
 import { COLORS } from '../constants';
-import Icon from 'react-native-vector-icons/Ionicons';
+import normalizePrice from '../helpers/normalizePrice';
 
 export const AnnouncementList = ({ img, title, price, adress, city, date }) => {
-  price = price.replace(/(\\xa)+/g, '');
+  const changedPrice = normalizePrice(price);
 
   return (
     <View style={styles.main}>
@@ -15,7 +15,7 @@ export const AnnouncementList = ({ img, title, price, adress, city, date }) => {
           style={styles.image}
         />
         <View style={styles.info}>
-          <Text style={styles.price}>{price}</Text>
+          <Text style={styles.price}>{changedPrice}</Text>
           <Text style={styles.title}>{title}</Text>
           {/* <Text style={styles.adress}>{adress}</Text> */}
           <View style={styles.subinfo}>
@@ -33,7 +33,7 @@ export const AnnouncementList = ({ img, title, price, adress, city, date }) => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    padding: 15,
+    padding: 8,
     backgroundColor: '#faf1e5',
   },
   container: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     // Shadow
-    elevation: 10,
+    elevation: 6,
     shadowColor: COLORS.gray,
   },
   image: {
