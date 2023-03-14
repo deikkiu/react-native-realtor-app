@@ -8,14 +8,18 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import { useAuth } from '../../auth/useAuth';
+import { createUser } from '../../utils/firebase';
 import { COLORS, SIZES, images } from '../../constants';
 
 export const SignUp = ({ navigation }) => {
+
+  const {isLoggedIn} = useAuth();
+
   const [inputValue, setInputValue] = useState({
-    nameValue: '',
-    emailValue: '',
-    passwordValue: '',
-    passwordConfirmValue: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
   });
 
   const changeInputValue = (text, name) => {
@@ -25,57 +29,68 @@ export const SignUp = ({ navigation }) => {
     });
   };
 
+  const signUp = async () => {
+
+    // Допиши пидр
+    if (inputValue.password !== inputValue.passwordConfirm) {
+      return;
+    }
+
+    createUser(inputValue.email, inputValue.password);
+  }
+
   return (
-    <ScrollView style={styles.main}>
-      <View style={styles.container}>
-        <View style={styles.wFull}>
-          <View style={styles.row}>
-            <Image source={images.appIcon} style={styles.image} />
-            <Text style={styles.brandName}>EstateEasy</Text>
-          </View>
+    <>
+      {isLoggedIn
+        ?
+          navigation.navigate('Profile')
+        :
+        <ScrollView style={styles.main}>
+          <View style={styles.container}>
+            <View style={styles.wFull}>
+              <View style={styles.row}>
+                <Image source={images.appIcon} style={styles.image} />
+                <Text style={styles.brandName}>EstateEasy</Text>
+              </View>
 
-          <Text style={styles.loginContinueTxt}>Создайте аккаунт</Text>
-          <TextInput
-            style={styles.input}
-            value={inputValue.nameValue}
-            placeholder="Имя"
-            onChangeText={(value) => changeInputValue(value, 'nameValue')}
-          />
-          <TextInput
-            style={styles.input}
-            value={inputValue.emailValue}
-            placeholder="Почта"
-            onChangeText={(value) => changeInputValue(value, 'emailValue')}
-          />
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            value={inputValue.passwordValue}
-            placeholder="Пароль"
-            onChangeText={(value) => changeInputValue(value, 'passwordValue')}
-          />
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            value={inputValue.passwordConfirmValue}
-            placeholder="Подтвердите пароль"
-            onChangeText={(value) =>
-              changeInputValue(value, 'passwordConfirmValue')
-            }
-          />
+              <Text style={styles.loginContinueTxt}>Создайте аккаунт</Text>
+              <TextInput
+                style={styles.input}
+                value={inputValue.emailValue}
+                placeholder="Почта"
+                onChangeText={(e) => changeInputValue(e, 'email')}
+              />
+              <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                value={inputValue.passwordValue}
+                placeholder="Пароль"
+                onChangeText={(e) => changeInputValue(e, 'password')}
+              />
+              <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                value={inputValue.passwordConfirmValue}
+                placeholder="Подтвердите пароль"
+                onChangeText={(e) =>
+                  changeInputValue(e, 'passwordConfirm')
+                }
+              />
 
-          {/* {SignUp button} */}
-          <View style={styles.loginBtnWrapper}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Home')}
-              style={styles.loginBtn}
-            >
-              <Text style={styles.loginText}>Зарегистрироваться</Text>
-            </TouchableOpacity>
+              {/* {SignUp button} */}
+              <View style={styles.loginBtnWrapper}>
+                <TouchableOpacity
+                  onPress={signUp}
+                  style={styles.loginBtn}
+                >
+                  <Text style={styles.loginText}>Зарегистрироваться</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
-    </ScrollView>
+        </ScrollView>
+      }
+    </>
   );
 };
 

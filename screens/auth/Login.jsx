@@ -6,26 +6,45 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
+import { useAuth } from '../../auth/useAuth';
 import { Icon } from 'react-native-vector-icons/Ionicons';
 import { COLORS, SIZES, images } from '../../constants';
 import { useState } from 'react';
+import { login } from '../../utils/firebase';
 
 export const Login = ({ navigation }) => {
+
+  const {isLoggedIn} = useAuth();
+
+
   const [inputValue, setInputValue] = useState({
-    textValue: '',
-    passwordValue: '',
+    email: '',
+    password: '',
   });
 
-  const changeInputValue = (text, name) => {
+  const changeInputValue = (value, name) => {
     setInputValue({
       ...inputValue,
-      [name]: text,
+      [name]: value,
     });
   };
+
+  const userLogin = async () => {
+    const loginReg = new RegExp('//g');
+    const passwordReg = new RegExp('//g');
+
+    await login(inputValue.email, inputValue.password);
+  }
 
   return (
     <View style={styles.main}>
       <View style={styles.container}>
+
+      {isLoggedIn
+        ?
+          navigation.navigate('Profile')
+        :
+        <>
         <View style={styles.wFull}>
           <View style={styles.row}>
             <Image source={images.appIcon} style={styles.image} />
@@ -36,7 +55,7 @@ export const Login = ({ navigation }) => {
           <TextInput
             style={styles.input}
             value={inputValue.textValue}
-            onChangeText={(value) => changeInputValue(value, 'textValue')}
+            onChangeText={(e) => changeInputValue(e, 'email')}
             placeholder="Почта"
           ></TextInput>
           <TextInput
@@ -44,13 +63,13 @@ export const Login = ({ navigation }) => {
             secureTextEntry={true}
             placeholder="Пароль"
             value={inputValue.passwordValue}
-            onChangeText={(value) => changeInputValue(value, 'passwordValue')}
+            onChangeText={(e) => changeInputValue(e, 'password')}
           />
 
           {/* {Login button} */}
           <View style={styles.loginBtnWrapper}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Home')}
+              onPress={userLogin}
               style={styles.loginBtn}
             >
               <Text style={styles.loginText}>Войти</Text>
@@ -72,6 +91,10 @@ export const Login = ({ navigation }) => {
             <Text style={styles.signupBtn}>Зарегистрироваться</Text>
           </TouchableOpacity>
         </View>
+      </>
+      }
+
+
       </View>
     </View>
   );

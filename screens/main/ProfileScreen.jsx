@@ -1,23 +1,51 @@
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { logout } from '../../utils/firebase';
+import { useAuth } from '../../auth/useAuth';
 import { COLORS } from '../../constants';
 
 export const ProfileScreen = ({ navigation }) => {
+
+  const {isLoggedIn, user} = useAuth();
+
+  const signOut = async () => {
+    await logout();
+  }
+
   return (
-    <View style={styles.main}>
-      <Text style={styles.title}>Добро пожаловать!</Text>
-      <Text style={styles.subtitle}>
-        Войдите в систему, чтобы сохранять объявления и получать обновления о
-        вашем домашнем поиске
-      </Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('Login');
-        }}
-      >
-        <Text style={styles.buttonText}>Войти</Text>
-      </TouchableOpacity>
-    </View>
+    <>
+      {isLoggedIn
+        ?
+        <View>
+            <Text>
+                {user?.email}
+            </Text>
+            <TouchableOpacity
+              style={styles.signout}
+              onPress={signOut}
+            >
+              <Text>
+                Выйти с аккаунта
+              </Text>
+            </TouchableOpacity>
+        </View>
+        :
+        <View style={styles.main}>
+          <Text style={styles.title}>Добро пожаловать!</Text>
+          <Text style={styles.subtitle}>
+            Войдите в систему, чтобы сохранять объявления и получать обновления о
+            вашем домашнем поиске
+          </Text>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate('Login');
+            }}
+          >
+            <Text style={styles.buttonText}>Войти</Text>
+          </TouchableOpacity>
+        </View>
+      }
+    </>
   );
 };
 
@@ -52,4 +80,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '900',
   },
+  signout: {
+    width: '80%',
+    alignItems: 'center',
+    marginTop: 12,
+    backgroundColor: COLORS.secondary,
+    padding: 12,
+    borderRadius: 20,
+  }
 });
